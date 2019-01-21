@@ -1,0 +1,33 @@
+
+
+<form class="form-signin" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+  </div>
+
+  <div class="form-label-group">
+    <input type="email" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+    required placeholder="Username">
+    <div  *ngIf="f.submitted && username.invalid">
+      <div class="error" *ngIf="username.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+    required minlength="6" required placeholder="Password">
+    <div  *ngIf="f.submitted && password.invalid">
+      <div class="error" *ngIf="password.errors.required">Password is required</div>
+      <div class="error" *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+    </div>
+  </div>
+
+  <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
+  <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+    Login failed: {{errorMessage}}
+  </div>
+  <hr />
+  <p>Don't have an account?</p>
+  <a href="register" class="btn btn-lg btn-success btn-block">Register</a>
+  <p class="mt-5 mb-3 text-muted text-center">© 2019</p>
+</form>
